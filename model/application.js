@@ -1,5 +1,3 @@
-const bcrypt = require("bcrypt");
-const { isEmail } = require("validator");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -10,9 +8,12 @@ const applicationSchema = new Schema(
       type: String,
       ref: "user",
     },
-    jobId: {
+    jobTitle: {
       type: String,
       ref: "job",
+    },
+    resume: {
+      type: String,
     },
   },
   { timestamps: true }

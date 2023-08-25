@@ -39,7 +39,6 @@ const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     Employer.findOne({ _id: req.user.id })
       .then((data) => {
-        console.log(data);
         data.isEmployer
           ? next()
           : res
@@ -47,7 +46,6 @@ const verifyTokenAndAdmin = (req, res, next) => {
               .json({ error: true, message: "You are not authorized!" });
       })
       .catch((error) => {
-        console.log(error);
         res
           .status(403)
           .json({ error: true, message: "You are not authorized!" });

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const { verifyTokenAndAdmin } = require("./middleware/auth");
+
+const { verifyToken, verifyTokenAndAdmin } = require("./middleware/auth");
 const {
   register,
   login,
@@ -14,7 +15,8 @@ const {
   getJob,
   updateJob,
   deleteJob,
-  applyForJob,
+  getApplication,
+  application,
 } = require("./controllers/jobController");
 router.route("/user").post(register);
 router.route("/user/login").post(login);
@@ -26,6 +28,7 @@ router.route("/job").get(getAllJob);
 router.route("/job/:id").get(getJob);
 router.route("/job/:id").put(verifyTokenAndAdmin, updateJob);
 router.route("/job/:id").delete(verifyTokenAndAdmin, deleteJob);
-router.route("/job/:id").post(applyForJob);
+router.route("/job/:id/apply").post(verifyToken, application);
+router.route("/applications").get(verifyTokenAndAdmin, getApplication);
 
 module.exports = router;

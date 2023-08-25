@@ -1,6 +1,7 @@
 const { handleErrors } = require("../middleware/errorHandler");
 const Job = require("../model/job");
 const Application = require("../model/application");
+const User = require("../model/user");
 
 const job = async (req, res) => {
   try {
@@ -67,7 +68,6 @@ const updateJob = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
     const error = handleErrors(err);
     res.status(500).json({ status: false, message: error });
   }
@@ -86,24 +86,58 @@ const deleteJob = async (req, res) => {
   }
 };
 
-const applyForJob = async (req, res) => {
+const application = async (req, res) => {
   const userId = req.user.id;
+  const { resume } = req.body; // Must be a link to the resume
+  const job = await Job.findOne({ _id: req.params.id });
+  const jobTitle = job.title;
+
   try {
-    const data = {
-      userId,
-    };
-    await Application.create();
+    const isPresent = await Application.findOne({ userId: userId });
+
+    if (isPresent) {
+      res.status(201).json({
+        status: true,
+        message: "You have already applied: Check out others",
+      });
+    } else {
+      const data = {
+        userId,
+        jobTitle,
+        resume,
+      };
+
+      await Application.create(data);
+      await User.findOneAndUpdate(
+        { _id: userId },
+        { $addToSet: { appliedJob: jobTitle } } // Using $addToSet to prevent duplicate jobTitle entries
+      );
+      res.status(201).json({ status: true, message: "Application successful" });
+    }
   } catch (err) {
     const error = handleErrors(err);
     res.status(500).json({ status: false, message: "Application failed" });
   }
 };
-
+const getApplication = async (req, res) => {
+  try {
+    const app = await Application.find();
+    if (app.length) {
+      res.status(200).json({ status: true, message: app });
+    } else {
+      res.status(404).json({ message: "No application yet" });
+    }
+  } catch (err) {
+    const error = handleErrors(err);
+    res.status(500).json({ status: false, error });
+  }
+};
 module.exports = {
   job,
   getAllJob,
   getJob,
   updateJob,
   deleteJob,
-  applyForJob,
+  getApplication,
+  application,
 };

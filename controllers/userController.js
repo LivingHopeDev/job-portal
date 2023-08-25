@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const Employer = require("../model/employer");
 const jwt = require("jsonwebtoken");
 const { handleErrors } = require("../middleware/errorHandler");
 const { createToken } = require("../middleware/auth");
@@ -26,7 +27,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { password, email } = req.body;
   try {
-    var user = await Login(email.trim(), password.trim());
+    const user = await Login(email.trim(), password.trim());
 
     if (user) {
       const token = createToken(user._id);
