@@ -17,7 +17,6 @@ const jobSchema = new Schema(
       type: String,
       required: [true, "Please enter email"],
       lowercase: true,
-      unique: true,
       validate: [isEmail, "Please enter a valid email"],
     },
     address: {

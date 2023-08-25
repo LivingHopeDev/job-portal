@@ -8,12 +8,16 @@ const applicationSchema = new Schema(
       type: String,
       ref: "user",
     },
-    jobTitle: {
+    userName: {
       type: String,
+      ref: "user",
+    },
+    jobTitle: {
+      type: Array,
       ref: "job",
     },
     resume: {
-      type: String,
+      type: Array,
     },
   },
   { timestamps: true }

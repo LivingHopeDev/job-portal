@@ -91,18 +91,35 @@ const application = async (req, res) => {
   const { resume } = req.body; // Must be a link to the resume
   const job = await Job.findOne({ _id: req.params.id });
   const jobTitle = job.title;
+  const user = await User.findOne({ _id: userId });
+  const userName = `${user.first_name} ${user.last_name}`;
 
   try {
     const isPresent = await Application.findOne({ userId: userId });
-
     if (isPresent) {
-      res.status(201).json({
-        status: true,
-        message: "You have already applied: Check out others",
-      });
+      // Check if the user already applied for the same job
+      if (isPresent.jobTitle.includes(`${jobTitle}`)) {
+        res.status(201).json({
+          status: true,
+          message: "You have already applied: Check out others",
+        });
+      } else {
+        await Application.findOneAndUpdate(
+          { userId: userId },
+          { $addToSet: { jobTitle: jobTitle, resume: resume } }
+        );
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { appliedJob: jobTitle } } // Using $addToSet to prevent duplicate jobTitle entries
+        );
+        res
+          .status(201)
+          .json({ status: true, message: "Application successful" });
+      }
     } else {
       const data = {
         userId,
+        userName,
         jobTitle,
         resume,
       };
@@ -110,7 +127,7 @@ const application = async (req, res) => {
       await Application.create(data);
       await User.findOneAndUpdate(
         { _id: userId },
-        { $addToSet: { appliedJob: jobTitle } } // Using $addToSet to prevent duplicate jobTitle entries
+        { $addToSet: { appliedJob: jobTitle } }
       );
       res.status(201).json({ status: true, message: "Application successful" });
     }

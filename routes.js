@@ -1,7 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 
-const { verifyToken, verifyTokenAndAdmin } = require("./middleware/auth");
+const {
+  verifyToken,
+  verifyTokenAndAdmin,
+  verifyTokenAndEmployer,
+} = require("./middleware/auth");
 const {
   register,
   login,
@@ -23,11 +27,11 @@ router.route("/user/login").post(login);
 router.route("/user/logout").get(logout);
 router.route("/user/:id/resume").post(uploadResume);
 router.route("/user/:id").put(updateUser);
-router.route("/job").post(verifyTokenAndAdmin, job);
+router.route("/job").post(verifyTokenAndEmployer, job);
 router.route("/job").get(getAllJob);
 router.route("/job/:id").get(getJob);
-router.route("/job/:id").put(verifyTokenAndAdmin, updateJob);
-router.route("/job/:id").delete(verifyTokenAndAdmin, deleteJob);
+router.route("/job/:id").put(verifyTokenAndEmployer, updateJob);
+router.route("/job/:id").delete(verifyTokenAndEmployer, deleteJob);
 router.route("/job/:id/apply").post(verifyToken, application);
 router.route("/applications").get(verifyTokenAndAdmin, getApplication);
 

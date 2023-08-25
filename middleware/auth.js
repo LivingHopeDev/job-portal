@@ -35,11 +35,29 @@ const verifyTokenAndAuthorization = (req, res, next) => {
   });
 };
 
+const verifyTokenAndEmployer = (req, res, next) => {
+  verifyToken(req, res, () => {
+    Employer.findOne({ _id: req.user.id })
+      .then((data) => {
+        data.isEmployer || data.isAdmin
+          ? next()
+          : res
+              .status(403)
+              .json({ error: true, message: "You are not authorized!" });
+      })
+      .catch((error) => {
+        res
+          .status(403)
+          .json({ error: true, message: "You are not authorized!" });
+      });
+  });
+};
+
 const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     Employer.findOne({ _id: req.user.id })
       .then((data) => {
-        data.isEmployer
+        data.isAdmin
           ? next()
           : res
               .status(403)
@@ -56,5 +74,6 @@ module.exports = {
   verifyToken,
   verifyTokenAndAdmin,
   verifyTokenAndAuthorization,
+  verifyTokenAndEmployer,
   createToken,
 };
