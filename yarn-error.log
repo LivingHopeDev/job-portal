@@ -1,0 +1,54 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\ADEWOBI\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\ADEWOBI\AppData\Local\Programs\Python\Python39;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\composer;C:\Program Files\PostgreSQL\14\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\ADEWOBI\AppData\Local\Programs\Enthought\edm\;C:\Users\ADEWOBI\AppData\Local\Microsoft\WindowsApps;C:\Users\ADEWOBI\AppData\Local\atom\bin;C:\Users\ADEWOBI\AppData\Local\Programs\Python\Python39;C:\Users\ADEWOBI\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\ADEWOBI\AppData\Local\Programs\Microsoft VS Code\bin;C:\wamp64\bin\php\php.8.0.19;C:\Users\ADEWOBI\AppData\Roaming\Composer\vendor\bin;C:\Program Files\heroku\bin;C:\Program Files\PostgreSQL\14\bin;C:\Users\ADEWOBI\AppData\Roaming\npm;C:\Users\ADEWOBI\AppData\Local\Programs\Hyper\resources\bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\backend\job-portal-API\node_modules\bcrypt\lib\binding\napi-v3\bcrypt_lib.node'
+
+npm manifest: 
+  {
+    "name": "job-portal-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+      "Job board",
+      "Job portal",
+      "nodejs",
+      "nodejs api",
+      "api"
+    ],
+    "author": "adewobiadetayo1@gmail.com <adewobiadetayo1@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+      "bcrypt": "^5.1.1",
+      "body-parser": "^1.20.2",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.1",
+      "mongoose": "^7.4.3",
+      "validator": "^13.11.0"
+    },
+    "repository": "https://github.com/LivingHopeDev/job-portal.git"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

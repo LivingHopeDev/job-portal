@@ -2,9 +2,10 @@
   "name": "job-portal-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "keywords": [
     "Job board",
@@ -13,7 +14,7 @@
     "nodejs api",
     "api"
   ],
-  "author": "",
+  "author": "adewobiadetayo1@gmail.com <adewobiadetayo1@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -24,5 +25,6 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.3",
     "validator": "^13.11.0"
-  }
+  },
+  "repository": "https://github.com/LivingHopeDev/job-portal.git"
 }
