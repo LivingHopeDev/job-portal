@@ -36,7 +36,7 @@ const login = async (req, res) => {
     }
   } catch (err) {
     const error = handleErrors(err);
-    res.status(400).json({ error });
+    res.status(400).json({ status: "failed", message: error });
   }
 };
 
