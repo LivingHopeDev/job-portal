@@ -21,10 +21,10 @@ const handleErrors = (err) => {
   // validation errors
   if (
     err.message.includes("Job validation failed") ||
-    err.message.includes("Employer validation failed")
+    err.message.includes("Employer validation failed") ||
+    err.message.includes("User validation failed")
   ) {
     Object.values(err.errors).forEach(({ properties }) => {
-      // errs[properties.path] = properties.message;
       errs = properties.message;
     });
   }
