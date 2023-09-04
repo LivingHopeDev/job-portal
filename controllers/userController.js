@@ -20,7 +20,6 @@ const register = async (req, res) => {
     }
   } catch (err) {
     const error = handleErrors(err);
-    console.log(err);
     res.status(500).json({ status: false, message: error });
   }
 };
